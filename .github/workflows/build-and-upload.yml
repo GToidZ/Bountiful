@@ -34,7 +34,7 @@ jobs:
       run: ./gradlew build
 
     # Upload build artifacts
-    - uses: action/upload-artifact@v7.0.1
+    - uses: actions/upload-artifact@v7.0.1
       with:
         path: 'bundle/mods/bountiful-*'
         archive: false
