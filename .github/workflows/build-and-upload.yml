@@ -18,11 +18,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v6
+      name: Checkout Bountiful
       with:
         fetch-depth: 0
     
     # Also requires build-logic
     - uses: actions/checkout@v6
+      name: Checkout build-logic
       with:
         repository: "ejektaflex/Mod-Build-Logic"
         ref: '26.1.2'
@@ -31,6 +33,7 @@ jobs:
 
     # Also need Kambrik
     - uses: actions/checkout@v6
+      name: Checkout Kambrik
       with:
         repository: "ejektaflex/Kambrik"
         ref: 'dev'
@@ -39,6 +42,7 @@ jobs:
 
     # Also need Percale
     - uses: actions/checkout@v6
+      name: Checkout Percale
       with:
         repository: "ejektaflex/Percale"
         path: '_percale'
@@ -52,15 +56,15 @@ jobs:
 
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v6
-    
-    - name: Build Kambrik
-      working-directory: ./_kambrik
+
+    - name: Build Percale
+      working-directory: ./_percale
       run: |
         chmod +x ./gradlew
         ./gradlew build publish
-    
-    - name: Build Percale
-      working-directory: ./_percale
+
+    - name: Build Kambrik
+      working-directory: ./_kambrik
       run: |
         chmod +x ./gradlew
         ./gradlew build publish
