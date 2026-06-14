@@ -20,6 +20,14 @@ jobs:
     - uses: actions/checkout@v6
       with:
         fetch-depth: 0
+    
+    # Also requires build-logic
+    - uses: actions/checkout@v6
+      with:
+        repository: "ejektaflex/Mod-Build-Logic"
+        path: 'build-logic'
+        clean: false
+
 
     - name: Set up JDK 21
       uses: actions/setup-java@v4
