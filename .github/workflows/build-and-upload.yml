@@ -29,6 +29,20 @@ jobs:
         path: 'build-logic'
         clean: false
 
+    # Also need Kambrik
+    - uses: actions/checkout@v6
+      with:
+        repository: "ejektaflex/Kambrik"
+        ref: 'dev'
+        path: '_kambrik'
+        clean: false
+
+    # Also need Percale
+    - uses: actions/checkout@v6
+      with:
+        repository: "ejektaflex/Percale"
+        path: '_percale'
+        clean: false
 
     - name: Set up JDK 21
       uses: actions/setup-java@v4
@@ -38,6 +52,18 @@ jobs:
 
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v6
+    
+    - name: Build Kambrik
+      working-directory: ./_kambrik
+      run: |
+        chmod +x ./gradlew
+        ./gradlew build publish
+    
+    - name: Build Percale
+      working-directory: ./_percale
+      run: |
+        chmod +x ./gradlew
+        ./gradlew build publish
     
     - name: Add Commit Hash to Mod Version
       run: sed -i "s/^version=.*/&+$(git rev-parse --short origin/fix/bounty-name-display)/" gradle.properties
