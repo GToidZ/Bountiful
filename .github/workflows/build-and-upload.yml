@@ -17,7 +17,7 @@ jobs:
       contents: read
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         fetch-depth: 0
 
@@ -31,7 +31,7 @@ jobs:
       uses: gradle/actions/setup-gradle@v6
     
     - name: Add Commit Hash to Mod Version
-      run: sed -i "s/^version=.*/&+$(git rev-parse --short fix/bounty-name-display)/" gradle.properties
+      run: sed -i "s/^version=.*/&+$(git rev-parse --short origin/fix/bounty-name-display)/" gradle.properties
 
     - name: Build with Gradle Wrapper
       run: |
